@@ -1,0 +1,33 @@
+[0.796s] Invoking command in '/home/arthur/ros2_ws/src/my_panda_sim': PYTHONPATH=/home/arthur/ros2_ws/build/my_panda_sim/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/arthur/ros2_ws/install/my_panda_sim/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/my_panda_sim build --build-base /home/arthur/ros2_ws/build/my_panda_sim/build install --record /home/arthur/ros2_ws/build/my_panda_sim/install.log --single-version-externally-managed install_data
+[1.040s] running egg_info
+[1.041s] creating ../../build/my_panda_sim/my_panda_sim.egg-info
+[1.041s] writing ../../build/my_panda_sim/my_panda_sim.egg-info/PKG-INFO
+[1.041s] writing dependency_links to ../../build/my_panda_sim/my_panda_sim.egg-info/dependency_links.txt
+[1.041s] writing entry points to ../../build/my_panda_sim/my_panda_sim.egg-info/entry_points.txt
+[1.043s] writing requirements to ../../build/my_panda_sim/my_panda_sim.egg-info/requires.txt
+[1.043s] writing top-level names to ../../build/my_panda_sim/my_panda_sim.egg-info/top_level.txt
+[1.043s] writing manifest file '../../build/my_panda_sim/my_panda_sim.egg-info/SOURCES.txt'
+[1.045s] reading manifest file '../../build/my_panda_sim/my_panda_sim.egg-info/SOURCES.txt'
+[1.045s] writing manifest file '../../build/my_panda_sim/my_panda_sim.egg-info/SOURCES.txt'
+[1.045s] running build
+[1.045s] running build_py
+[1.045s] creating /home/arthur/ros2_ws/build/my_panda_sim/build
+[1.045s] creating /home/arthur/ros2_ws/build/my_panda_sim/build/lib
+[1.045s] creating /home/arthur/ros2_ws/build/my_panda_sim/build/lib/my_panda_sim
+[1.046s] copying my_panda_sim/__init__.py -> /home/arthur/ros2_ws/build/my_panda_sim/build/lib/my_panda_sim
+[1.046s] running install
+[1.046s] running install_lib
+[1.047s] creating /home/arthur/ros2_ws/install/my_panda_sim/lib/python3.10/site-packages/my_panda_sim
+[1.047s] copying /home/arthur/ros2_ws/build/my_panda_sim/build/lib/my_panda_sim/__init__.py -> /home/arthur/ros2_ws/install/my_panda_sim/lib/python3.10/site-packages/my_panda_sim
+[1.049s] byte-compiling /home/arthur/ros2_ws/install/my_panda_sim/lib/python3.10/site-packages/my_panda_sim/__init__.py to __init__.cpython-310.pyc
+[1.049s] running install_data
+[1.049s] creating /home/arthur/ros2_ws/install/my_panda_sim/share/ament_index
+[1.049s] creating /home/arthur/ros2_ws/install/my_panda_sim/share/ament_index/resource_index
+[1.049s] creating /home/arthur/ros2_ws/install/my_panda_sim/share/ament_index/resource_index/packages
+[1.049s] copying resource/my_panda_sim -> /home/arthur/ros2_ws/install/my_panda_sim/share/ament_index/resource_index/packages
+[1.049s] copying package.xml -> /home/arthur/ros2_ws/install/my_panda_sim/share/my_panda_sim
+[1.049s] running install_egg_info
+[1.052s] Copying ../../build/my_panda_sim/my_panda_sim.egg-info to /home/arthur/ros2_ws/install/my_panda_sim/lib/python3.10/site-packages/my_panda_sim-0.0.0-py3.10.egg-info
+[1.052s] running install_scripts
+[1.072s] writing list of installed files to '/home/arthur/ros2_ws/build/my_panda_sim/install.log'
+[1.096s] Invoked command in '/home/arthur/ros2_ws/src/my_panda_sim' returned '0': PYTHONPATH=/home/arthur/ros2_ws/build/my_panda_sim/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/arthur/ros2_ws/install/my_panda_sim/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/my_panda_sim build --build-base /home/arthur/ros2_ws/build/my_panda_sim/build install --record /home/arthur/ros2_ws/build/my_panda_sim/install.log --single-version-externally-managed install_data
