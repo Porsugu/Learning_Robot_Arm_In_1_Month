@@ -1,3 +1,4 @@
+#day 4: testing ros node with simple heartbeat
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String

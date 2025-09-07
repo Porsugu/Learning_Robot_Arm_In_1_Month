@@ -9,7 +9,7 @@ setup.py
 ../../build/my_panda_sim/my_panda_sim.egg-info/top_level.txt
 ../../build/my_panda_sim/my_panda_sim.egg-info/zip-safe
 my_panda_sim/__init__.py
-my_panda_sim/sim_node.py
+my_panda_sim/day4_sim_node.py
 resource/my_panda_sim
 test/test_copyright.py
 test/test_flake8.py

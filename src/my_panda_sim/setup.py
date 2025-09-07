@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'panda_heartbeat = my_panda_sim.sim_node:main',
+            'panda_heartbeat = my_panda_sim.day4_sim_node:main',
         ],
     },
 )
