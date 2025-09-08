@@ -44,7 +44,7 @@ Argument	Default	Description
 --demo	off	Apply sinusoidal motion to the first joint (useful for testing and demos).
 ```
 
-###Examples:
+### Examples:
 
 # Run with GUI visualization and sinusoidal demo
 python3 joint_state_publisher.py --gui --demo
@@ -58,14 +58,14 @@ python3 joint_state_publisher.py --urdf ~/robots/ur5.urdf --direct
 ###🎥 Demo Screenshot
 ![Recording 2025-09-07 215054](https://github.com/user-attachments/assets/929a7fd0-be34-4198-a5bd-d5590304cfca)
 
-###📂 Repository Structure
+### 📂 Repository Structure
 ```
 my_panda_sim/
 ├── README.md
 └── my_panda_sim/
     └── joint_state_publisher.py
 ```
-###🔮 Next Steps (Week2)
+### 🔮 Next Steps (Week2)
 
 Extract DH parameters from the URDF.
 
