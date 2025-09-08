@@ -1,4 +1,4 @@
-# My Panda Sim — Week 1 (Day1–7)
+# ros2_ws — Week 1 (Day4–7)
 
 ## 📌 Overview
 This project is part of a 30-day robotics programming learning plan.  
