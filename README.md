@@ -75,6 +75,7 @@ Compare FK results with PyBullet’s built-in forward kinematics.
 
 Begin experimenting with Inverse Kinematics (IK).
 
+### Project achievement
 💡 This Week 1 marks the foundation of the robotics programming journey:
 setting up the environment, understanding URDFs, connecting PyBullet with ROS2, and publishing standard joint states.
 
