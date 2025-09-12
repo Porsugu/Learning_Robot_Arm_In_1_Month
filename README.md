@@ -32,7 +32,7 @@ Navigate to your package directory:
    python3 test_fk.py
    ```
 ---
-Day9
+## Day9
 ### Achievement
 Built a MatrixChainDebugger class to print each step and the cumulative result
 Verified matrix multiplication order with a test script
