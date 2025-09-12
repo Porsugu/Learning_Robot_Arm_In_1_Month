@@ -33,4 +33,13 @@ Navigate to your package directory:
    ```
 ---
 Day9
-Achievement
+### Achievement
+Built a MatrixChainDebugger class to print each step and the cumulative result
+Verified matrix multiplication order with a test script
+
+### How to Run
+```
+   cd ~/ros2_ws/src/my_panda_sim/my_panda_sim
+   python3 test_matrix_chain.py
+
+```
