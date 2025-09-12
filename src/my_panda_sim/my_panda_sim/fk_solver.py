@@ -1,3 +1,6 @@
+'''
+day8: added Forwardkinematics class. accept target angles to joints, and calculate the transform of ee regarding to base
+'''
 import numpy as np
 import pybullet as p
 from scipy.spatial.transform import Rotation as R
