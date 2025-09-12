@@ -16,9 +16,9 @@ The focus is on building modular tools for **Forward Kinematics (FK)** and stepp
 - **Day 14**: Testing IK with constraints
 
 ---
-##Day8
+## Day8
 
-###Achievement
+### Achievement
 
 Built a Forward Kinematics tool class that converts joint angles into end-effector position and orientation.
 Designed in a modular way so it can be reused in later days (matrix FK, IK, motion planning).
