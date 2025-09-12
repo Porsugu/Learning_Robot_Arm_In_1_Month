@@ -1,4 +1,3 @@
-
 #day 4: testing ros node with simple heartbeat
 import rclpy                        #ROS2 Python API
 from rclpy.node import Node         #Node, every customized node are under this type  

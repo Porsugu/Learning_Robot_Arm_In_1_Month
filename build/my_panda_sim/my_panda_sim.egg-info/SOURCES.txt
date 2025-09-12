@@ -10,6 +10,9 @@ setup.py
 ../../build/my_panda_sim/my_panda_sim.egg-info/zip-safe
 my_panda_sim/__init__.py
 my_panda_sim/day4_sim_node.py
+my_panda_sim/day5_ROS2_joint_state_publisher.py
+my_panda_sim/day5_joint_test.py
+my_panda_sim/day6_frame_listener.py
 resource/my_panda_sim
 test/test_copyright.py
 test/test_flake8.py

@@ -1,7 +1,13 @@
 /home/arthur/ros2_ws/install/my_panda_sim/lib/python3.10/site-packages/my_panda_sim/day4_sim_node.py
+/home/arthur/ros2_ws/install/my_panda_sim/lib/python3.10/site-packages/my_panda_sim/day5_ROS2_joint_state_publisher.py
 /home/arthur/ros2_ws/install/my_panda_sim/lib/python3.10/site-packages/my_panda_sim/__init__.py
+/home/arthur/ros2_ws/install/my_panda_sim/lib/python3.10/site-packages/my_panda_sim/day6_frame_listener.py
+/home/arthur/ros2_ws/install/my_panda_sim/lib/python3.10/site-packages/my_panda_sim/day5_joint_test.py
 /home/arthur/ros2_ws/install/my_panda_sim/lib/python3.10/site-packages/my_panda_sim/__pycache__/day4_sim_node.cpython-310.pyc
+/home/arthur/ros2_ws/install/my_panda_sim/lib/python3.10/site-packages/my_panda_sim/__pycache__/day5_ROS2_joint_state_publisher.cpython-310.pyc
 /home/arthur/ros2_ws/install/my_panda_sim/lib/python3.10/site-packages/my_panda_sim/__pycache__/__init__.cpython-310.pyc
+/home/arthur/ros2_ws/install/my_panda_sim/lib/python3.10/site-packages/my_panda_sim/__pycache__/day6_frame_listener.cpython-310.pyc
+/home/arthur/ros2_ws/install/my_panda_sim/lib/python3.10/site-packages/my_panda_sim/__pycache__/day5_joint_test.cpython-310.pyc
 /home/arthur/ros2_ws/install/my_panda_sim/share/ament_index/resource_index/packages/my_panda_sim
 /home/arthur/ros2_ws/install/my_panda_sim/share/my_panda_sim/package.xml
 /home/arthur/ros2_ws/install/my_panda_sim/lib/python3.10/site-packages/my_panda_sim-0.0.0-py3.10.egg-info/entry_points.txt
@@ -11,4 +17,5 @@
 /home/arthur/ros2_ws/install/my_panda_sim/lib/python3.10/site-packages/my_panda_sim-0.0.0-py3.10.egg-info/requires.txt
 /home/arthur/ros2_ws/install/my_panda_sim/lib/python3.10/site-packages/my_panda_sim-0.0.0-py3.10.egg-info/SOURCES.txt
 /home/arthur/ros2_ws/install/my_panda_sim/lib/python3.10/site-packages/my_panda_sim-0.0.0-py3.10.egg-info/zip-safe
+/home/arthur/ros2_ws/install/my_panda_sim/lib/my_panda_sim/frame_listener
 /home/arthur/ros2_ws/install/my_panda_sim/lib/my_panda_sim/panda_heartbeat

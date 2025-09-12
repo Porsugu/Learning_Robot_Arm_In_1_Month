@@ -72,8 +72,8 @@ class JointStatePublisherNode(Node):
         if self.joint_indices:
             t = time.time() - self.t0
             target = 0.5 * math.sin(2.0 * math.pi * 0.2 * t)  # 0.5rad, 0.2Hz
-            j0 = self.joint_indices[0]
-            p.setJointMotorControl2(self.robot_id, j0, p.POSITION_CONTROL,
+            j1 = self.joint_indices[1]
+            p.setJointMotorControl2(self.robot_id, j1, p.POSITION_CONTROL,
                                     targetPosition=target, force=self.max_force)
 
         msg = JointState()                      #make a string
@@ -123,3 +123,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+

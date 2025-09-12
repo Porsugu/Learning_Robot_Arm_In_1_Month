@@ -21,6 +21,7 @@ setup(
     entry_points={
         'console_scripts': [
             'panda_heartbeat = my_panda_sim.day4_sim_node:main',
+            'frame_listener = my_panda_sim.day6_frame_listener:main',
         ],
     },
 )
