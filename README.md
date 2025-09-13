@@ -43,3 +43,29 @@ Verified matrix multiplication order with a test script
    python3 test_matrix_chain.py
 
 ```
+---
+## Day10
+### Achievement
+Implemented ForwardKinematics (FKSolver) as a reusable class that can compute the end-effector pose from given joint angles.
+
+Built a ROS2 node (fk_publisher) that:
+
+Uses FKSolver internally.
+
+Publishes the computed end-effector pose to the topic /fk_pose.
+
+Currently uses a fixed test joint configuration (q_test) for demonstration.
+
+Created a launch file (display.launch.py) to start:
+
+robot_state_publisher with Panda URDF.
+
+A static transform (world → panda_link0).
+
+The fk_publisher node.
+
+Integrated everything into setup.py with proper console entry points.
+
+👉 Outcome: The FK tool is no longer just a math script — it is now a proper ROS2 node that can publish results, preparing the system for multi-node integration in later weeks.
+
+
