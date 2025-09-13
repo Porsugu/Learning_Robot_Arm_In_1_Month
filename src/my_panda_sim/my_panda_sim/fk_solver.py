@@ -5,16 +5,15 @@ import numpy as np
 import pybullet as p
 from scipy.spatial.transform import Rotation as R
 
-import utils
-from src.my_panda_sim.my_panda_sim.utils import to_homogeneous
+from my_panda_sim.utils import to_homogeneous
 
 
 class ForwardKinematics:
     def __init__(self, robot_id, joint_indexes,ee_link_index,  T_w_b = None):
         self.robot_id = robot_id
         self.joint_indexes = joint_indexes
-        self.ee_link_index = ee_link_index if ee_link_index is not None else np.eye(4)
-        self.T_w_b = T_w_b
+        self.ee_link_index = ee_link_index
+        self.T_w_b = T_w_b if T_w_b is not None else np.eye(4)
 
     def forward(self, q):
         for index, angle in zip(self.joint_indexes, q):

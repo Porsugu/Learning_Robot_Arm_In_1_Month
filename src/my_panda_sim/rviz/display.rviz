@@ -1,0 +1,13 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+    Displays:
+      - Class: rviz_default_plugins/RobotModel
+        Name: RobotModel
+        Enabled: true
+        Robot Description: robot_description
+        Visual Enabled: true
+        Collision Enabled: false
+Visualization Manager:
+  Fixed Frame: panda_link0
+  Name: root

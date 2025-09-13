@@ -1,3 +1,2 @@
 [console_scripts]
-frame_listener = my_panda_sim.day6_frame_listener:main
-panda_heartbeat = my_panda_sim.day4_sim_node:main
+fk_publisher = my_panda_sim.fk_publisher:main
