@@ -1,4 +1,8 @@
+"""
+day11: added FKPublisher node. subscribes to /joint_states and publishes end-effector pose (/fk_pose) using FKSolver
+"""
 import rclpy
+
 from rclpy.node import Node
 from geometry_msgs.msg import PoseStamped
 from sensor_msgs.msg import JointState
@@ -6,8 +10,7 @@ from sensor_msgs.msg import JointState
 import pybullet as p
 import pybullet_data
 import numpy as np
-
-from my_panda_sim.fk_solver import ForwardKinematics
+from src.my_panda_sim.my_panda_sim.fk_solver import FKSolver
 
 
 class FKPublisher(Node):
@@ -34,7 +37,7 @@ class FKPublisher(Node):
         self.joint_indices = [0, 1, 2, 3, 4, 5, 6]
 
         # FK solver
-        self.fk = ForwardKinematics(self.robot_id, self.joint_indices, ee_link_index=11)
+        self.fk = FKSolver(self.robot_id, self.joint_indices, base_link_index=0)
 
         # save current joint
         self.current_q = None

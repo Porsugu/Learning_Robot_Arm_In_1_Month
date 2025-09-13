@@ -1,31 +1,75 @@
 '''
 day8: added Forwardkinematics class. accept target angles to joints, and calculate the transform of ee regarding to base
+day11: upgraded FKSolver with bullet_state_guard, support arbitrary link index, and return (pos, quat) or full transform matrix
 '''
-import numpy as np
 import pybullet as p
+import numpy as np
+from contextlib import contextmanager
 from scipy.spatial.transform import Rotation as R
 
-from my_panda_sim.utils import to_homogeneous
+@contextmanager
+def bullet_state_guard():
+    state_id = p.saveState()
+    try:
+        yield
+    finally:
+        p.restoreState(state_id)
 
+def to_homogeneous(pos, orn):
+    """pos, quat -> 4x4 matrix"""
+    Rm = np.array(p.getMatrixFromQuaternion(orn)).reshape(3,3)
+    T = np.eye(4)
+    T[:3,:3] = Rm
+    T[:3, 3] = np.array(pos)
+    return T
 
-class ForwardKinematics:
-    def __init__(self, robot_id, joint_indexes,ee_link_index,  T_w_b = None):
-        self.robot_id = robot_id
-        self.joint_indexes = joint_indexes
-        self.ee_link_index = ee_link_index
-        self.T_w_b = T_w_b if T_w_b is not None else np.eye(4)
+class FKSolver:
+    def __init__(self, body_id, joint_indices, base_link_index=0):
+        self.body_id = body_id
+        self.joint_indices = joint_indices
+        self.base_link_index = base_link_index
 
-    def forward(self, q):
-        for index, angle in zip(self.joint_indexes, q):
-            p.resetJointState(self.robot_id,index,angle)
+    def forward(self, q, target_link_index, return_matrix=False):
+        """
+        input:
+            q (list/ndarray): joint angles
+            target_link_index (int): link index (e.g. 11 for panda_hand)
+            return_matrix (bool): if True, also return 4x4 transform matrix
 
-        ls = p.getLinkState(self.robot_id, self.ee_link_index)
-        pos_w, orn_w = ls[4], ls[5]
+        output:
+            pos (np.array, shape (3,))
+            quat (np.array, shape (4,), [x,y,z,w])
+            (optional) T_base_link (np.array, shape (4,4))
+        """
+        with bullet_state_guard():
+            p.setJointMotorControlArray(
+                self.body_id,
+                self.joint_indices,
+                p.POSITION_CONTROL,
+                targetPositions=q
+            )
 
-        T_w_ee = to_homogeneous(pos_w, orn_w)
-        T_b_ee = np.linalg.inv(self.T_w_b) @ T_w_ee
+            #Get link pos and orn that is base on the world
+            # world -> link
+            link_state = p.getLinkState(self.body_id, target_link_index, computeForwardKinematics=True)
+            w_pos, w_orn = link_state[4], link_state[5]
+            T_w_link = to_homogeneous(w_pos, w_orn)
 
-        pos_b_ee = T_b_ee[:3, 3]
-        orn_b_ee = R.from_matrix(T_b_ee[:3, :3]).as_quat()
+            # Get T_w_base
+            # world -> base
+            base_state = p.getLinkState(self.body_id, self.base_link_index, computeForwardKinematics=True)
+            base_pos, base_orn = base_state[4], base_state[5]
+            T_w_base = to_homogeneous(base_pos, base_orn)
 
-        return np.array(pos_b_ee), np.array(orn_b_ee)
+            #T_w_base @ T_base_link = T_world_base
+            # base -> link
+            T_base_link = np.linalg.inv(T_w_base) @ T_w_link
+
+            pos = T_base_link[:3, 3]
+            Rm = T_base_link[:3, :3]
+            quat = R.from_matrix(Rm).as_quat()   # [x, y, z, w]
+
+            if return_matrix:
+                return pos, quat, T_base_link
+            else:
+                return pos, quat
