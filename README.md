@@ -69,29 +69,27 @@ Integrated everything into setup.py with proper console entry points.
 👉 Outcome: The FK tool is no longer just a math script — it is now a proper ROS2 node that can publish results, preparing the system for multi-node integration in later weeks.
 ---
 ## Day11
-###
-Day 11 Achievement
+### Achievement
 
 Upgraded ForwardKinematics into a modular FKSolver:
-
 Added bullet_state_guard to protect simulation state.
-
 Supports arbitrary target link index, not limited to end-effector.
-
 Provides two output modes:
 
 (pos, quat) → for ROS2 PoseStamped
-
 T_base_link (4×4) → for Jacobian, IK, and trajectory planning
 
 Implemented FKPublisher ROS2 node:
-
 Subscribes to /joint_states for joint angles.
-
 Uses FKSolver to compute forward kinematics.
-
 Publishes /fk_pose (PoseStamped) with the end-effector pose in the base frame.
-
 Achieved a complete pipeline: JointState → FK → PoseStamped → ROS2 topic.
+---
+## Day 12-14
+### Achievement
+Implemented a Jacobian-based Damped Least Squares (DLS) IK solver, capable of solving end-effector positions from arbitrary joint configurations.
+Gained practical understanding of how Jacobian relates joint velocities to end-effector motions, and how damping stabilizes solutions near singularities.
+Explored joint limits, convergence issues, and developed intuition about when IK succeeds, fails, or requires multiple initial guesses.
+---
 
 
