@@ -1,3 +1,18 @@
+$$
+a^2 + b^2 = c^2
+$$
+
+$$
+\dot{x} = J(q)\,\dot{q}
+$$
+
+$$
+\Delta q = J^{\top}\left(JJ^{\top} + \lambda^{2} I\right)^{-1} e
+$$
+
+
+
+
 # Week 2 | Forward & Inverse Kinematics
 
 ## 📆 Scope
