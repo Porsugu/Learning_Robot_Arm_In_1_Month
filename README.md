@@ -16,6 +16,12 @@ The focus is on building modular tools for **Forward Kinematics (FK)** and stepp
 - **Day 14**: Testing IK with constraints
 
 ---
+
+## Week 2 Learning Reflection (Day8–Day14)
+This week I built a deeper understanding of forward and inverse kinematics. Through implementing a modular FK solver, I learned how to compute link poses relative to the base frame and why homogeneous transformations make chained motions easier to reason about. Moving to IK, I implemented a Jacobian-based Damped Least Squares solver, which taught me how end-effector errors can be mapped back into joint updates. I realized that damping is essential to handle singularities and that convergence depends on initial guesses, joint limits, and task constraints. By experimenting, I developed practical intuition: FK is deterministic, while IK may fail or require multiple strategies. Although I still need to study the math of matrix derivatives more rigorously, I can now clearly explain the principles of FK and IK, and I know how engineering systems often rely on robust solvers like TRAC-IK when tasks involve complex constraints such as grasp orientations.
+
+---
+
 ## Day8
 
 ### Achievement
