@@ -27,6 +27,7 @@ Integrated nearest-solution correction to avoid joint discontinuities
 Combined with TrajectoryGenerator for joint-space interpolation
 
 Successfully executed trajectories in PyBullet GUI, moving the Panda arm from home pose to target (0.4, 0.2, 0.3) with the end-effector correctly oriented palm-down
+
 ---
 ## Day16:
 Implemented TrajectoryGenerator_v2 supporting Cartesian interpolation:
@@ -38,4 +39,5 @@ Orientation: quaternion SLERP
 Integrated with IKSolverV2, enabling conversion from Cartesian waypoints to joint trajectories.
 
 Successfully executed trajectories in PyBullet GUI, visualizing end-effector motion along smooth Cartesian paths.
+
 ---
