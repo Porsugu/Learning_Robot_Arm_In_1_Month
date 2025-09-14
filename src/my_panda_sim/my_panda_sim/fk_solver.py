@@ -24,52 +24,64 @@ def to_homogeneous(pos, orn):
     return T
 
 class FKSolver:
-    def __init__(self, body_id, joint_indices, base_link_index=0):
+    def __init__(self, body_id, joint_indices, ee_link_index, base_link_index=0):
         self.body_id = body_id
         self.joint_indices = joint_indices
+        self.ee_link_index = ee_link_index
         self.base_link_index = base_link_index
 
-    def forward(self, q, target_link_index, return_matrix=False):
-        """
-        input:
-            q (list/ndarray): joint angles
-            target_link_index (int): link index (e.g. 11 for panda_hand)
-            return_matrix (bool): if True, also return 4x4 transform matrix
+    def forward(self, q, target_link_index=None, return_matrix=False):
+        if target_link_index is None:
+            target_link_index = self.ee_link_index
 
-        output:
-            pos (np.array, shape (3,))
-            quat (np.array, shape (4,), [x,y,z,w])
-            (optional) T_base_link (np.array, shape (4,4))
-        """
         with bullet_state_guard():
-            p.setJointMotorControlArray(
-                self.body_id,
-                self.joint_indices,
-                p.POSITION_CONTROL,
-                targetPositions=q
-            )
+            for i, jidx in enumerate(self.joint_indices):
+                p.resetJointState(self.body_id, jidx, float(q[i]))
 
-            #Get link pos and orn that is base on the world
             # world -> link
             link_state = p.getLinkState(self.body_id, target_link_index, computeForwardKinematics=True)
             w_pos, w_orn = link_state[4], link_state[5]
             T_w_link = to_homogeneous(w_pos, w_orn)
 
-            # Get T_w_base
             # world -> base
             base_state = p.getLinkState(self.body_id, self.base_link_index, computeForwardKinematics=True)
             base_pos, base_orn = base_state[4], base_state[5]
             T_w_base = to_homogeneous(base_pos, base_orn)
 
-            #T_w_base @ T_base_link = T_world_base
             # base -> link
             T_base_link = np.linalg.inv(T_w_base) @ T_w_link
 
             pos = T_base_link[:3, 3]
             Rm = T_base_link[:3, :3]
-            quat = R.from_matrix(Rm).as_quat()   # [x, y, z, w]
+            from scipy.spatial.transform import Rotation as Rot
+            quat = Rot.from_matrix(Rm).as_quat()  # [x,y,z,w]
 
-            if return_matrix:
-                return pos, quat, T_base_link
-            else:
-                return pos, quat
+            return (pos, quat, T_base_link) if return_matrix else (pos, quat)
+
+
+    def forward_no_protect(self, q, target_link_index=None, return_matrix=False):
+        if target_link_index is None:
+            target_link_index = self.ee_link_index
+
+        for i, jidx in enumerate(self.joint_indices):
+            p.resetJointState(self.body_id, jidx, float(q[i]))
+
+        # world -> link
+        link_state = p.getLinkState(self.body_id, target_link_index, computeForwardKinematics=True)
+        w_pos, w_orn = link_state[4], link_state[5]
+        T_w_link = to_homogeneous(w_pos, w_orn)
+
+        # world -> base（你用 base_link_index=0，對 Panda 是 link0）
+        base_state = p.getLinkState(self.body_id, self.base_link_index, computeForwardKinematics=True)
+        base_pos, base_orn = base_state[4], base_state[5]
+        T_w_base = to_homogeneous(base_pos, base_orn)
+
+        # base -> link
+        T_base_link = np.linalg.inv(T_w_base) @ T_w_link
+
+        pos = T_base_link[:3, 3]
+        Rm = T_base_link[:3, :3]
+        from scipy.spatial.transform import Rotation as Rot
+        quat = Rot.from_matrix(Rm).as_quat()  # [x,y,z,w]
+
+        return (pos, quat, T_base_link) if return_matrix else (pos, quat)
