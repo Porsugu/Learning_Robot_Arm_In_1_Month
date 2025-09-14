@@ -40,8 +40,7 @@ During this week I focused on building both the implementation and intuition of 
   To iteratively reduce the position error \(e = x^* - x(q)\), I applied the DLS update rule:
 
   $$
-  \Delta q = J^{	op}\left(JJ^{	op} + \lambda^{2} I
-ight)^{-1} e
+  \Delta q = J^{	op}\left(JJ^{	op} + \lambda^{2} Iight)^{-1} e
   $$
 
   This taught me how damping \(\lambda\) ensures numerical stability near singularities by making the system well-conditioned.
@@ -63,25 +62,11 @@ Built a Forward Kinematics tool class that converts joint angles into end-effect
 Designed in a modular way so it can be reused in later days (matrix FK, IK, motion planning).
 Successfully tested with the Franka Panda robot in PyBullet.
 
-### How to Run
-Navigate to your package directory:  
-   ```
-   bash
-   cd ~/ros2_ws/src/my_panda_sim/my_panda_sim
-   python3 test_fk.py
-   ```
----
+
 ## Day9
 ### Achievement
 Built a MatrixChainDebugger class to print each step and the cumulative result
 Verified matrix multiplication order with a test script
-
-### How to Run
-```
-   cd ~/ros2_ws/src/my_panda_sim/my_panda_sim
-   python3 test_matrix_chain.py
-
-```
 ---
 ## Day10
 ### Achievement
