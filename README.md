@@ -1,18 +1,3 @@
-$$
-a^2 + b^2 = c^2
-$$
-
-$$
-\dot{x} = J(q)\,\dot{q}
-$$
-
-$$
-\Delta q = J^{\top}\left(JJ^{\top} + \lambda^{2} I\right)^{-1} e
-$$
-
-
-
-
 # Week 2 | Forward & Inverse Kinematics
 
 ## 📆 Scope
@@ -46,17 +31,22 @@ During this week I focused on building both the implementation and intuition of 
 
 - **Inverse Kinematics (IK):**  
   I implemented a Jacobian-based solver using Damped Least Squares (DLS). The Jacobian $J$ links joint velocities $\dot{q}$ to end-effector velocities:
-
+---
+  
   $$
   \dot{x} = J(q)\,\dot{q}
   $$
 
+---
+
   To iteratively reduce the position error $e = x^* - x(q)$, I applied the DLS update rule:
+---
 
   $$
   \Delta q = J^{\top}\left(JJ^{\top} + \lambda^{2} I\right)^{-1} e
   $$
 
+---
   This taught me how damping $\lambda$ ensures numerical stability near singularities by making the system well-conditioned.
 
 - **Practical Intuition:**  
