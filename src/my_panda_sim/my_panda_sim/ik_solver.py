@@ -102,28 +102,3 @@ class IKSolver:
         feasible.sort(key=lambda x: (x[2], x[3]))
         best_q, best_code, best_err, best_dist = feasible[0]
         return best_q, best_code, best_err
-
-
-# ---------------- test ----------------
-if __name__ == "__main__":
-    # Setup PyBullet
-    p.connect(p.DIRECT)
-    p.setAdditionalSearchPath(pybullet_data.getDataPath())
-    robot_id = p.loadURDF("franka_panda/panda.urdf", useFixedBase=True)
-
-    joint_indices = list(range(7))   # Panda arm 7 DOF
-    ee_link_index = 11               # panda_hand link
-
-    ik = IKSolver(robot_id, joint_indices, ee_link_index, verbose=False)
-
-    q_now = [0, 0, 0, 0, 0, 0, 0]
-    # q_now = [0, -0.3, 0, -2.0, 0, 2.0, 0.8]
-    # target_pos = np.array([0.0, 0.0, 0.0])
-    # target_pos = np.array([0.16322435, 0.215286, 0.52320021])
-    target_pos = np.array([ 5.46059966e-01, -1.37935843e-12,  5.12618423e-02])
-    q_best, code, err = ik.solve_smart_multi(q_now, target_pos, trials=10)
-    # q_best, code, err = ik.solve(q_now, target_pos, trials=10)
-
-    print("Smart multi IK return:", code)
-    print("Best q:", q_best)
-    print("Error:", err)
