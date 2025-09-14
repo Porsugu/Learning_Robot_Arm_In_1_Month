@@ -16,7 +16,6 @@ The focus is on building modular tools for **Forward Kinematics (FK)** and stepp
 - **Day 14**: Testing IK with constraints
 
 
-
 ## Week 2 Learning Reflection (Day8–Day14)
 
 During this week I focused on building both the implementation and intuition of forward and inverse kinematics.
@@ -40,13 +39,14 @@ During this week I focused on building both the implementation and intuition of 
   To iteratively reduce the position error $e = x^* - x(q)$, I applied the DLS update rule:
 
   $$
-  \Delta q = J^{\top}\!\left(JJ^{\top} + \lambda^{2} I\right)^{-1} e
+  \Delta q = J^{\top}\left(JJ^{\top} + \lambda^{2} I\right)^{-1} e
   $$
 
   This taught me how damping $\lambda$ ensures numerical stability near singularities by making the system well-conditioned.
 
 - **Practical Intuition:**  
   I learned that IK may not always converge: results depend on initial guesses, joint limits, and redundancy. Multiple initializations or null-space objectives can increase success rates. Compared to FK, which is direct and exact, IK is iterative and approximate.
+
 
 
 
