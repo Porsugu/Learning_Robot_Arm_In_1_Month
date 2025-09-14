@@ -84,7 +84,7 @@ class IKSolver:
                 low, high = self.joint_limits[i]
                 q[i] = np.clip(q[i], low, high)
 
-        return q, -1  # fail
+        return q, -1
 
     def solve_smart_multi(self, q_now, target_pos, trials=10, noise_scale=0.2):
         candidates = []
