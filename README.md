@@ -31,7 +31,7 @@ During this week I focused on building both the implementation and intuition of 
   I understood why FK is deterministic and always produces a unique solution given the configuration.
 
 - **Inverse Kinematics (IK):**  
-  I implemented a Jacobian-based solver using Damped Least Squares (DLS). The Jacobian \(J\) links joint velocities \(\dot{q}\) to end-effector velocities \(\dot{x}\):
+  I implemented a Jacobian-based solver using Damped Least Squares (DLS). The Jacobian \(J\) links joint velocities \(\dot{q}\) to end-effector velocities:
 
   $$
   \dot{x} = J(q)\,\dot{q}
