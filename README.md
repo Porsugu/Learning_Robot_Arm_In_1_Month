@@ -34,7 +34,7 @@ During this week I focused on building both the implementation and intuition of 
   I implemented a Jacobian-based solver using Damped Least Squares (DLS). The Jacobian \(J\) links joint velocities \(\dot{q}\) to end-effector velocities:
 
   $$
-  \dot{x} = J(q)\,\dot{q}
+  T_{0}^{ee}(q) = \prod_{i=1}^{n} T_{i-1}^{i}(q_i)
   $$
 
   To iteratively reduce the position error \(e = x^* - x(q)\), I applied the DLS update rule:
