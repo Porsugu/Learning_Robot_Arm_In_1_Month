@@ -18,7 +18,38 @@ The focus is on building modular tools for **Forward Kinematics (FK)** and stepp
 ---
 
 ## Week 2 Learning Reflection (Day8–Day14)
-This week I built a deeper understanding of forward and inverse kinematics. Through implementing a modular FK solver, I learned how to compute link poses relative to the base frame and why homogeneous transformations make chained motions easier to reason about. Moving to IK, I implemented a Jacobian-based Damped Least Squares solver, which taught me how end-effector errors can be mapped back into joint updates. I realized that damping is essential to handle singularities and that convergence depends on initial guesses, joint limits, and task constraints. By experimenting, I developed practical intuition: FK is deterministic, while IK may fail or require multiple strategies. Although I still need to study the math of matrix derivatives more rigorously, I can now clearly explain the principles of FK and IK, and I know how engineering systems often rely on robust solvers like TRAC-IK when tasks involve complex constraints such as grasp orientations.
+
+During this week I focused on building both the implementation and intuition of forward and inverse kinematics.  
+
+- **Forward Kinematics (FK):**  
+  I implemented a modular FK solver that takes joint angles \(q\) and computes the end-effector pose with respect to the base frame. By chaining homogeneous transformations:  
+
+  \[
+  T_{0}^{ee}(q) = \prod_{i=1}^{n} T_{i-1}^{i}(q_i),
+  \]  
+
+  I understood why FK is deterministic and always produces a unique solution given the configuration.  
+
+- **Inverse Kinematics (IK):**  
+  I implemented a Jacobian-based solver using Damped Least Squares (DLS). The Jacobian \(J\) links joint velocities \(\dot{q}\) to end-effector velocities \(\dot{x}\):  
+
+  \[
+  \dot{x} = J(q) \, \dot{q}.
+  \]  
+
+  To iteratively reduce the position error \(e = x^* - x(q)\), I applied the DLS update rule:  
+
+  \[
+  \Delta q = J^T \big(JJ^T + \lambda^2 I\big)^{-1} e.
+  \]  
+
+  This taught me how damping \(\lambda\) ensures numerical stability near singularities by making the matrix always invertible.  
+
+- **Practical Intuition:**  
+  I learned that IK may not always converge: results depend on initial guesses, joint limits, and redundancy. Multiple initializations or null-space objectives can increase success rates. Compared to FK, which is direct and exact, IK is iterative and approximate.  
+
+Although I still need deeper study on matrix calculus to rigorously derive these results, I can now confidently explain the principles behind FK and IK and understand why in real engineering tasks, robust solvers like **TRAC-IK** or **MoveIt** are often preferred when handling complex grasping or orientation constraints.  
+
 
 ---
 
