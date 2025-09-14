@@ -22,11 +22,11 @@ During this week I focused on building both the implementation and intuition of 
 
 - **Forward Kinematics (FK):**  
   I implemented a modular FK solver that takes joint angles $q$ and computes the end-effector pose with respect to the base frame. By chaining homogeneous transformations:
-
+---
   $$
   T_{0}^{ee}(q) = \prod_{i=1}^{n} T_{i-1}^{i}(q_i)
   $$
-
+---
   I understood why FK is deterministic and always produces a unique solution given the configuration.
 
 - **Inverse Kinematics (IK):**  
