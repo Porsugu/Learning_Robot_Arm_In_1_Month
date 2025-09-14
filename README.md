@@ -15,7 +15,7 @@ The focus is on building modular tools for **Forward Kinematics (FK)** and stepp
 - **Day 13**: Introduction to numerical IK
 - **Day 14**: Testing IK with constraints
 
----
+
 
 ## Week 2 Learning Reflection (Day8–Day14)
 
@@ -53,7 +53,7 @@ Although I still need deeper study on matrix calculus to rigorously derive these
 
 
 
----
+
 
 ## Day8
 
