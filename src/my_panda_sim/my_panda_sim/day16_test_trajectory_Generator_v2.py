@@ -6,7 +6,7 @@ import pybullet_data
 
 from fk_solver import FKSolver
 from ik_solver_v2 import IKSolverV2
-from ik_solver_v3 import IKSolverV3
+
 from Trajectory_Generator_v2 import TrajectoryGenerator
 
 
@@ -24,8 +24,7 @@ def main():
 
 
     fk = FKSolver(robot_id, list(range(dof)), ee_link_index)
-    # ik = IKSolverV2(robot_id, ee_link_index, dof=dof)
-    ik = IKSolverV3(robot_id, ee_link_index=11, dof=7, wrist_joint_index=9)
+    ik = IKSolverV2(robot_id, ee_link_index, dof=dof)
     traj_gen = TrajectoryGenerator(n_steps=50)
 
 

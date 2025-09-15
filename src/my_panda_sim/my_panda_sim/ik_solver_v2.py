@@ -3,9 +3,6 @@
 import pybullet as p
 import numpy as np
 
-def quat_hand_down():
-    return p.getQuaternionFromEuler([0, np.pi, 0])
-
 class IKSolverV2:
     def __init__(self, body_id, ee_link_index, dof=7, max_iters=200, tol=1e-4):
         self.body_id = body_id
@@ -36,5 +33,7 @@ class IKSolverV2:
             q_sol = alt
 
         return q_sol, 0
+
+
 
 

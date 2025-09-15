@@ -5,7 +5,7 @@ import pybullet_data
 
 from fk_solver import FKSolver
 from ik_solver_v2 import IKSolverV2
-from Trajectory_Generator import TrajectoryGenerator
+from trajectory_generator import TrajectoryGenerator
 
 
 def main():
