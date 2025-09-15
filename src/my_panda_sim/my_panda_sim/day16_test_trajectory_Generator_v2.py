@@ -6,6 +6,7 @@ import pybullet_data
 
 from fk_solver import FKSolver
 from ik_solver_v2 import IKSolverV2
+from ik_solver_v3 import IKSolverV3
 from Trajectory_Generator_v2 import TrajectoryGenerator
 
 
@@ -23,12 +24,13 @@ def main():
 
 
     fk = FKSolver(robot_id, list(range(dof)), ee_link_index)
-    ik = IKSolverV2(robot_id, ee_link_index, dof=dof)
+    # ik = IKSolverV2(robot_id, ee_link_index, dof=dof)
+    ik = IKSolverV3(robot_id, ee_link_index=11, dof=7, wrist_joint_index=9)
     traj_gen = TrajectoryGenerator(n_steps=50)
 
 
     q_start = [0, 0, 0, -1.57, 0, 1.57, 0]  # relaxed home-like pose
-    target_pos = [0.5, 0.2, 0.3]
+    target_pos = [5.45983672e-01, 1.97734416e-12, 5.19242287e-02]
     target_quat = p.getQuaternionFromEuler([np.pi, 0, 0])  # facing down
 
 

@@ -1,2 +1,0 @@
-[console_scripts]
-fk_publisher = my_panda_sim.fk_publisher:main
