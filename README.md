@@ -41,3 +41,9 @@ Integrated with IKSolverV2, enabling conversion from Cartesian waypoints to join
 Successfully executed trajectories in PyBullet GUI, visualizing end-effector motion along smooth Cartesian paths.
 
 ---
+## Day17:
+The creation of the Executor module, 
+which takes a Trajectory (from Day15/16) and reliably executes it on the Panda arm in PyBullet using POSITION_CONTROL with safe torque limits and synchronized timing; 
+this closes the loop from planning → playback, 
+proving that smooth quintic joint-space trajectories can be generated and then actually run, 
+establishing the foundation for later modules like CollisionChecker and ErrorAnalyzer.
