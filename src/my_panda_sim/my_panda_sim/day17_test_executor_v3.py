@@ -30,11 +30,12 @@ def main():
 
     # Define waypoints
     waypoints = [
-        [-0.5, -0.2, 0.5],
-        [0.5,  0.2, 0.5],
-        [0.5,  0.2, 0.2],
-        [0.5, -0.2, 0.2],
-        [0.5, -0.2, 0.5]
+        [-0.5, -0.4, 0.6],
+        [0.6, 0.4, 0.6],
+        [0.6, -0.4, 0.3],
+        [-0.6, 0.4, 0.3],
+        [0.0, 0.0, 0.7],  #
+
     ]
 
     # Visualize targets
@@ -46,8 +47,9 @@ def main():
     current_q = q_start_pose
     for i, goal_pos in enumerate(waypoints):
         print(f"\n===== Moving to waypoint {i + 1}: {goal_pos} =====")
-        q_traj, _ = executor.execute(current_q, goal_pos, down=True, plot=True, print_diff=False)
+        q_traj, _ = executor.execute(current_q, goal_pos, down=True, plot=False, print_diff=False)
         current_q = np.array(q_traj[-1])
+
         time.sleep(1)
 
     print("\nAll waypoints completed.")

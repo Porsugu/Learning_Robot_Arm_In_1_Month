@@ -44,36 +44,76 @@ class ExecutorV3:
         # Interpolate Cartesian trajectory
         traj_ideal = self.traj_gen.interpolate(cur_pos, goal_pos)
         traj_real = [cur_pos.tolist()]
-
         q_traj = [q_init]
         q_cur = np.array(q_init, dtype=float)
         errors = []
 
-        i = 1
+        # i = 1
+        # while i < len(traj_ideal):
+        #     target_pos = np.array(traj_ideal[i])
+        #
+        #     # PreSolve: base alignment
+        #     aligned, aligned_q_init = self.ik_solver.preSolve(q_cur, traj_ideal[-1])
+        #     if not aligned:
+        #         self._move_joints_smoothly(q_cur, np.array(aligned_q_init))
+        #         ls = p.getLinkState(self.robot_id, self.ee_link_index, computeForwardKinematics=True)
+        #         cur_pos = np.array(ls[4])
+        #         traj_ideal = self.traj_gen.interpolate(cur_pos, traj_ideal[-1])
+        #         q_cur = aligned_q_init
+        #         continue
+        #
+        #     # IK solve for current waypoint
+        #     q_cur = aligned_q_init
+        #     q_sol, _ = self.ik_solver.solve(q_cur, target_pos, down=down)
+        #     q_sol = np.array(q_sol, dtype=float)
+        #     self._move_joints_smoothly(q_cur, q_sol)
+        #
+        #     # Update joint state
+        #     q_cur = q_sol.copy()
+        #     q_traj.append(q_cur.tolist())
+        #
+        #     # Record real EE position
+        #     ls = p.getLinkState(self.robot_id, self.ee_link_index, computeForwardKinematics=True)
+        #     real_pos = np.array(ls[4])
+        #     traj_real.append(real_pos.tolist())
+        #
+        #     # Track error
+        #     pos_diff = np.linalg.norm(target_pos - real_pos)
+        #     errors.append(pos_diff)
+        #     if print_diff:
+        #         print(f"Step {i}: target={target_pos}, real={real_pos}, diff={pos_diff:.6f}")
+        #
+        #     i += 1
+
+        i = 0
         while i < len(traj_ideal):
             target_pos = np.array(traj_ideal[i])
 
             # PreSolve: base alignment
             aligned, aligned_q_init = self.ik_solver.preSolve(q_cur, traj_ideal[-1])
             if not aligned:
+                # 執行 preSolve 的移動，但不要記錄進 traj_real
                 self._move_joints_smoothly(q_cur, np.array(aligned_q_init))
+                # 更新當前 joint 狀態
+                q_cur = np.array(aligned_q_init)
+                # 更新 EE 真實位置
                 ls = p.getLinkState(self.robot_id, self.ee_link_index, computeForwardKinematics=True)
                 cur_pos = np.array(ls[4])
+                # 重新生成插值（從新位置到最後目標）
                 traj_ideal = self.traj_gen.interpolate(cur_pos, traj_ideal[-1])
-                q_cur = aligned_q_init
+                i = 0  # 重新從第一個新 waypoint 開始
                 continue
 
             # IK solve for current waypoint
-            q_cur = aligned_q_init
             q_sol, _ = self.ik_solver.solve(q_cur, target_pos, down=down)
             q_sol = np.array(q_sol, dtype=float)
-            self._move_joints_smoothly(q_cur, q_sol)
 
-            # Update joint state
+            # 執行 joint 動作
+            self._move_joints_smoothly(q_cur, q_sol)
             q_cur = q_sol.copy()
             q_traj.append(q_cur.tolist())
 
-            # Record real EE position
+            # 記錄真實 EE 位置
             ls = p.getLinkState(self.robot_id, self.ee_link_index, computeForwardKinematics=True)
             real_pos = np.array(ls[4])
             traj_real.append(real_pos.tolist())
@@ -85,7 +125,6 @@ class ExecutorV3:
                 print(f"Step {i}: target={target_pos}, real={real_pos}, diff={pos_diff:.6f}")
 
             i += 1
-
         # Error report
         if errors:
             mean_err = np.mean(errors)
@@ -100,7 +139,7 @@ class ExecutorV3:
             self.plot_trajectory(traj_ideal, traj_real)
 
         # Freeze final state
-        self._freeze_kinematic(self.robot_id, self.dof, q_cur, frames=60)
+        # self._freeze_kinematic(self.robot_id, self.dof, q_cur, frames=60)
 
         return q_traj, (traj_ideal, traj_real)
 
