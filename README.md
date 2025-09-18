@@ -59,3 +59,13 @@ Completion: trajectory is executed reliably, even for targets in different orien
 This workflow ensures that the robot can now grasp objects from multiple orientations without falling into unstable IK solutions. By enforcing viewpoint constraints and modularizing each step (TrajectoryGenerator, IKSolver, Executor), the system achieves both robustness and flexibility—components can be swapped or optimized independently.
 
 Day17 establishes the practical foundation for upcoming modules such as CollisionChecker and ErrorAnalyzer, proving that smooth Cartesian → joint-space trajectories can be generated, safeguarded against singularities, and executed in real-time.
+
+---
+## Day18
+Achievement
+
+Implemented a simple collision tracker for the Panda robot in PyBullet.
+
+Supports checking whether the robot is colliding (or within a safety margin) with obstacles.
+
+Integrated with a demo trajectory executor for real-time safety monitoring.
