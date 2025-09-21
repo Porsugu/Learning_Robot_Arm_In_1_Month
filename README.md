@@ -69,3 +69,17 @@ Implemented a simple collision tracker for the Panda robot in PyBullet.
 Supports checking whether the robot is colliding (or within a safety margin) with obstacles.
 
 Integrated with a demo trajectory executor for real-time safety monitoring.
+
+---
+## Day19-21
+Achievements
+
+We successfully built a full pick-and-place pipeline on top of our modular framework.
+
+Day19: Introduced PickAndPlaceManagerV1, integrating Executor, IK solver, Trajectory Generator, and Gripper into a high-level API (pick(), place()).
+
+Day20: Extended ExecutorV4 with gripper logic, collision pause/resume, and safe return-to-home after each task.
+
+Day21: Implemented TaskSchedulerV2 with a dynamic task queue, enabling background execution of multiple tasks (spawn cube → pick → place → home).
+
+By the end of Day21, we had a fully automated pipeline: cubes can be spawned interactively, queued as tasks, and the robot autonomously executes home → pick → place → home cycles.
