@@ -1,4 +1,4 @@
-Progress Summary
+## Progress Summary
 ## Week 1 (Day1–Day7) – Foundations
 
 Set up the PyBullet simulation environment with the Franka Panda robot.
