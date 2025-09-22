@@ -3,17 +3,15 @@
 <package format="3">
   <name>my_panda_sim</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <description>Panda pick and place simulation with ROS2 and PyBullet</description>
+
   <maintainer email="arthur@todo.todo">arthur</maintainer>
-  <license>TODO: License declaration</license>
+  <license>Apache-2.0</license>
 
   <depend>rclpy</depend>
   <depend>std_msgs</depend>
-
-  <test_depend>ament_copyright</test_depend>
-  <test_depend>ament_flake8</test_depend>
-  <test_depend>ament_pep257</test_depend>
-  <test_depend>python3-pytest</test_depend>
+  <exec_depend>my_panda_interfaces</exec_depend>
+  <exec_depend>rosidl_default_runtime</exec_depend>
 
   <export>
     <build_type>ament_python</build_type>

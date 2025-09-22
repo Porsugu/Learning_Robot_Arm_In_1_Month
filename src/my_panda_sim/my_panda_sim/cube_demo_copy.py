@@ -10,11 +10,11 @@ import pybullet as p
 import pybullet_data
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QLabel
 
-from trajectory_generator_v3 import TrajectoryGeneratorV3
-from ik_solver_v2 import IKSolverV2
-from gripper import Gripper
-from executor_v4 import ExecutorV4
-from task_scheduler_v2 import TaskSchedulerV2
+from .trajectory_generator_v3 import TrajectoryGeneratorV3
+from .ik_solver_v2 import IKSolverV2
+from .gripper import Gripper
+from .executor_v4 import ExecutorV4
+from .task_scheduler_v2 import TaskSchedulerV2
 
 
 class CubeDemo:
@@ -178,6 +178,12 @@ class ControlWindow(QWidget):
         self.setLayout(layout)
         self.demo.gui_label = self.status_label
 
+def start_gui(demo: CubeDemo):
+    app = QApplication(sys.argv)
+    control = ControlWindow(demo)
+    control.show()
+    sys.exit(app.exec_())
+
 
 def main():
     demo = CubeDemo()
@@ -185,10 +191,7 @@ def main():
     sim_thread = threading.Thread(target=demo.run, daemon=True)
     sim_thread.start()
 
-    app = QApplication(sys.argv)
-    control = ControlWindow(demo)
-    control.show()
-    sys.exit(app.exec_())
+    start_gui(demo)
 
 
 if __name__ == "__main__":

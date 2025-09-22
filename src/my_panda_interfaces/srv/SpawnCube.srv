@@ -1,0 +1,4 @@
+# Input: can blank, make 1 cube
+---
+# Output：cube ID (PyBullet object unique ID)
+int32 cube_id

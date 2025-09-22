@@ -9,8 +9,7 @@ from sensor_msgs.msg import JointState
 
 import pybullet as p
 import pybullet_data
-import numpy as np
-from src.my_panda_sim.my_panda_sim.fk_solver import FKSolver
+from src.my_panda_sim.my_panda_sim.old_file.fk_solver import FKSolver
 
 
 class FKPublisher(Node):
