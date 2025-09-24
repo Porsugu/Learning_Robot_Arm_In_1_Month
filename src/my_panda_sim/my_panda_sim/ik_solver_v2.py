@@ -33,7 +33,7 @@ class IKSolverV2:
         # World-to-base transform (optional)
         self.T_w_base = T_w_base if T_w_base is not None else np.eye(4)
 
-    def preSolve(self, q_init, target_pos, margin=np.pi / 2):
+    def preSolve(self, q_init, target_pos, margin=np.pi / 6):
         """
         Pre-alignment step before IK:
         - Checks if target azimuth lies within joint0 ± margin.

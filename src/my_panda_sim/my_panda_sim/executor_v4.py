@@ -119,9 +119,11 @@ class ExecutorV4:
                 q_traj2, _ = self._execute_core(q_traj1[-1], drop_pos, down, plot, print_diff, presolve=False)
                 q_traj_total.extend(q_traj2[1:])
 
+
                 if self.gripper:
                     print("[Executor] Place → Opening gripper.")
-                    self.gripper.set_width(0.08)
+                    self.gripper.wait_until_settled(timeout=0.6)
+                    # self.gripper.set_width(0.08)
                     self.gripper.open(width=0.08)
                     self.gripper.wait_until_settled(timeout=0.5)
                     time.sleep(0.3)
@@ -171,15 +173,15 @@ class ExecutorV4:
             q_sol, _ = self.ik_solver.solve(q_cur, target_pos, down=down)
             q_sol = np.array(q_sol, dtype=float)
 
-            if self.collision_checker and self.collision_checker.detect_collision():
-                print("[Executor] Collision detected → Pausing execution.")
-                self._paused = True
-                self._resume_flag = False
-                while not self._resume_flag:
-                    p.stepSimulation()
-                    time.sleep(1.0 / 240.0)
-                print("[Executor] Resumed execution.")
-                self._paused = False
+            # if self.collision_checker and self.collision_checker.detect_collision():
+            #     print("[Executor] Collision detected → Pausing execution.")
+            #     self._paused = True
+            #     self._resume_flag = False
+            #     while not self._resume_flag:
+            #         p.stepSimulation()
+            #         time.sleep(1.0 / 240.0)
+            #     print("[Executor] Resumed execution.")
+            #     self._paused = False
 
             self._move_joints_smoothly(q_cur, q_sol)
             q_cur = q_sol.copy()
