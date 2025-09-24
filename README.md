@@ -26,7 +26,7 @@ graph TD
     A -->|Service| E[/set_drop_pos/]
     A -->|Publisher| F[/task_status/]
 
-    A -->|Controls| G[CubeDemo (PyBullet)]
+    A -->|Controls| G[CubeDemo / PyBullet]
     G --> H[IKSolverV2]
     G --> I[TrajectoryGeneratorV3]
     G --> J[ExecutorV4]
