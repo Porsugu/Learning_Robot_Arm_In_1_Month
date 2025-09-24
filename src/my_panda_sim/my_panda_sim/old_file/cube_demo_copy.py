@@ -10,11 +10,11 @@ import pybullet as p
 import pybullet_data
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QLabel
 
-from .trajectory_generator_v3 import TrajectoryGeneratorV3
-from .ik_solver_v2 import IKSolverV2
-from .gripper import Gripper
-from .executor_v4 import ExecutorV4
-from .task_scheduler_v2 import TaskSchedulerV2
+from src.my_panda_sim.my_panda_sim.trajectory_generator_v3 import TrajectoryGeneratorV3
+from src.my_panda_sim.my_panda_sim.ik_solver_v2 import IKSolverV2
+from src.my_panda_sim.my_panda_sim.gripper import Gripper
+from src.my_panda_sim.my_panda_sim.executor_v4 import ExecutorV4
+from src.my_panda_sim.my_panda_sim.task_scheduler_v2 import TaskSchedulerV2
 
 
 class CubeDemo:
@@ -109,6 +109,8 @@ class CubeDemo:
                            f"Completed: {self.total_completed}, "
                            f"Pending: {len(self.task_queue)}")
             self.gui_label.setText(status_text)
+
+
 
     def run(self):
         """Background simulation loop"""

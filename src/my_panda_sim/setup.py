@@ -20,6 +20,7 @@ setup(
     entry_points={
         'console_scripts': [
             'run_node = my_panda_sim.run_node:main',
+            'gui_control = my_panda_sim.gui_control:main',
         ],
     },
 )

@@ -1,0 +1,8 @@
+# Input: end-effector target pose
+float64[3] position
+float64[4] orientation  # quaternion
+
+---
+# Output: joint solution
+float64[] joints
+bool success

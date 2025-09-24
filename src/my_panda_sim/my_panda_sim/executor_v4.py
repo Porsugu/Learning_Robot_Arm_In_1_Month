@@ -42,9 +42,8 @@ class ExecutorV4:
             print("[Executor] Resuming trajectory execution...")
             self._resume_flag = True
 
-    # ================================================================
+
     # Public API
-    # ================================================================
     def execute(self, q_init, goal_pos, down=True, plot=False, print_diff=True,
                 move=None, obj_id=None, hover_offset=0.1,
                 place_surface_id=None, place_clearance=0.005, place_hover_offset=None):
@@ -107,9 +106,7 @@ class ExecutorV4:
 
             return q_traj, None
 
-        # -------------------
         # PLACE mode
-        # -------------------
         elif move == "place":
             q_traj_total = []
 
@@ -153,15 +150,11 @@ class ExecutorV4:
 
             return q_traj_total, None
 
-        # -------------------
         # Regular motion
-        # -------------------
         else:
             return self._execute_core(q_init, goal_pos, down, plot, print_diff, presolve=True)
 
-    # ================================================================
     # Core trajectory execution
-    # ================================================================
     def _execute_core(self, q_init, goal_pos, down=True, plot=False, print_diff=True, presolve=True):
         ls = p.getLinkState(self.robot_id, self.ee_link_index, computeForwardKinematics=True)
         cur_pos = np.array(ls[4])
