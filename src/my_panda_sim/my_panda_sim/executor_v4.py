@@ -44,9 +44,8 @@ class ExecutorV4:
                 move=None, obj_id=None, hover_offset=0.1,
                 place_surface_id=None, place_clearance=0.005, place_hover_offset=None):
 
-        # -------------------
+
         # PICK (grip) mode
-        # -------------------
         if move == "grip":
             if obj_id is None:
                 raise ValueError("move='grip' requires obj_id")
@@ -58,7 +57,7 @@ class ExecutorV4:
             obj_width = max(x_size, y_size)
 
             MAX_OPEN = 0.08
-            OPEN_MARGIN = 0.004
+            OPEN_MARGIN = 0.01
             STRICT_WIDTH = min(obj_width, MAX_OPEN)
             OPEN_WIDTH = min(obj_width + OPEN_MARGIN, MAX_OPEN)
 
@@ -73,7 +72,7 @@ class ExecutorV4:
             q_traj, _ = self._execute_core(q_init, hover_pos, down, plot, print_diff, presolve=True)
 
             if self.gripper:
-                self.gripper.open(width=OPEN_WIDTH)
+                self.gripper.open(width=0.08)
                 time.sleep(0.2)
 
             q_traj2, _ = self._execute_core(q_traj[-1], grasp_pos, down, plot, print_diff, presolve=False)
@@ -91,9 +90,9 @@ class ExecutorV4:
                 self.gripper.wait_until_settled(timeout=0.6)
                 print("ContactPoints:", p.getContactPoints(bodyA=self.robot_id, bodyB=obj_id))
 
-            lift_pos = [goal_pos[0], goal_pos[1], grasp_z + 0.10]
-            q_traj4, _ = self._execute_core(q_traj[-1], lift_pos, down, plot, print_diff, presolve=False)
-            q_traj.extend(q_traj4[1:])
+            # lift_pos = [goal_pos[0], goal_pos[1], grasp_z + 0.10]
+            # q_traj4, _ = self._execute_core(q_traj[-1], lift_pos, down, plot, print_diff, presolve=False)
+            # q_traj.extend(q_traj4[1:])
 
             q_home_aligned = self._compute_aligned_home(goal_pos)
             self._move_joints_smoothly(np.array(q_traj[-1]), q_home_aligned)

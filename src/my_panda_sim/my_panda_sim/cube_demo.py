@@ -86,12 +86,15 @@ class CubeDemo:
     def _sample_position(self):
         """Randomly sample a valid cube position."""
         while True:
-            x = random.uniform(0.3, 0.7)
-            y = random.uniform(-0.5, 0.3)
+            x = random.uniform(-0.5, 0.5)
+            y = random.uniform(-0.5, -0.3)
             pos = [x, y, 0.02]
 
             # Avoid tray area
             if abs(x - self.drop_pos[0]) < 0.2 and abs(y - self.drop_pos[1]) < 0.2:
+                continue
+
+            if -0.3 < x < 0.3:
                 continue
 
             # Avoid overlapping cubes
