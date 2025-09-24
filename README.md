@@ -18,7 +18,7 @@ The goal of this project is to **practice real-world robotics software engineeri
 
 This is not just a demo, but a **learning platform** to explore how industrial robotic software is structured.
 
----
+
 
 ## 🏗 Architecture
 
