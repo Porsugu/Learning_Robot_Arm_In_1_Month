@@ -7,6 +7,7 @@ It was built step by step to learn and showcase **ROS2 nodes, services, publishe
   <br/>
   <em>Demo (2× speed)</em>
 </p>
+
 ---
 
 ## 🎯 Motivation
@@ -18,8 +19,7 @@ The goal of this project is to **practice real-world robotics software engineeri
 
 This is not just a demo, but a **learning platform** to explore how industrial robotic software is structured.
 
-
-
+---
 ## 🏗 Architecture
 
 ```mermaid
