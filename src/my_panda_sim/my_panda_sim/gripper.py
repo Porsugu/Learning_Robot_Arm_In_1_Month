@@ -25,7 +25,7 @@ class Gripper:
         for j in self.fingers:
             p.changeDynamics(
                 self.robot_id, j,
-                lateralFriction=5.0,
+                lateralFriction=10.0,
                 rollingFriction=0.001,
                 spinningFriction=0.001
             )
