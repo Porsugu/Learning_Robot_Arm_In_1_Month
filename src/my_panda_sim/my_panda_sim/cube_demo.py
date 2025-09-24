@@ -113,6 +113,16 @@ class CubeDemo:
         obj_id = p.loadURDF("cube_small.urdf", pos)
         p.changeVisualShape(obj_id, -1, rgbaColor=[0.0, 1.0, 0.0, 1.0])
 
+        # Add friction so physics mode can grip
+        p.changeDynamics(
+            obj_id, -1,
+            mass=0.02,
+            lateralFriction=1.5,
+            rollingFriction=0.001,
+            spinningFriction=0.001,
+            restitution=0.0  # no bouncing
+        )
+
         self.task_queue.append({"id": obj_id, "pick_pos": pos})
         self.spawned_cubes.append(obj_id)
         self.total_generated += 1
