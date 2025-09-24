@@ -90,9 +90,9 @@ class ExecutorV4:
                 self.gripper.wait_until_settled(timeout=0.6)
                 print("ContactPoints:", p.getContactPoints(bodyA=self.robot_id, bodyB=obj_id))
 
-            # lift_pos = [goal_pos[0], goal_pos[1], grasp_z + 0.10]
-            # q_traj4, _ = self._execute_core(q_traj[-1], lift_pos, down, plot, print_diff, presolve=False)
-            # q_traj.extend(q_traj4[1:])
+            lift_pos = [goal_pos[0], goal_pos[1], grasp_z + 0.30]
+            q_traj4, _ = self._execute_core(q_traj[-1], lift_pos, down, plot, print_diff, presolve=False)
+            q_traj.extend(q_traj4[1:])
 
             q_home_aligned = self._compute_aligned_home(goal_pos)
             self._move_joints_smoothly(np.array(q_traj[-1]), q_home_aligned)

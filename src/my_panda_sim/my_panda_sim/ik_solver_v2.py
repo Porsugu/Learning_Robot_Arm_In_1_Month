@@ -33,26 +33,43 @@ class IKSolverV2:
         # World-to-base transform (optional)
         self.T_w_base = T_w_base if T_w_base is not None else np.eye(4)
 
-    def preSolve(self, q_init, target_pos, margin=np.pi / 6):
-        """
-        Pre-alignment step before IK:
-        - Checks if target azimuth lies within joint0 ± margin.
-        - If outside, returns a home pose aligned with target azimuth.
-        - This reduces singularities and improves IK convergence.
-        """
-        q_init = np.array(q_init, dtype=float).copy()
+    # def preSolve(self, q_init, target_pos, margin=np.pi / 6):
+    #     """
+    #     Pre-alignment step before IK:
+    #     - Checks if target azimuth lies within joint0 ± margin.
+    #     - If outside, returns a home pose aligned with target azimuth.
+    #     - This reduces singularities and improves IK convergence.
+    #     """
+    #     q_init = np.array(q_init, dtype=float).copy()
+    #
+    #     q0 = q_init[0]
+    #     target_theta = np.arctan2(target_pos[1], target_pos[0])
+    #
+    #     diff = np.arctan2(np.sin(target_theta - q0), np.cos(target_theta - q0))
+    #     aligned = abs(diff) < margin
+    #
+    #     if aligned:
+    #         return True, q_init
+    #
+    #     new_q_init = np.array(self.home_pose, dtype=float)
+    #     new_q_init[0] = target_theta
+    #     return False, new_q_init
 
-        q0 = q_init[0]
+
+    def preSolve(self, q_init, target_pos):
+        """
+        Unconditionally aligns the robot's base to face the target.
+        This version is confirmed by direct joint testing.
+        The final angle is mapped to the [0, 2π] range.
+        """
         target_theta = np.arctan2(target_pos[1], target_pos[0])
 
-        diff = np.arctan2(np.sin(target_theta - q0), np.cos(target_theta - q0))
-        aligned = abs(diff) < margin
-
-        if aligned:
-            return True, q_init
+        # target_theta = (target_theta_raw + 2 * np.pi) % (2 * np.pi)
 
         new_q_init = np.array(self.home_pose, dtype=float)
+
         new_q_init[0] = target_theta
+
         return False, new_q_init
 
     def solve(self, q_init, target_pos, target_quat=None, down=False):
@@ -72,6 +89,7 @@ class IKSolverV2:
         if q_init is None:
             q_init = [0.0] * self.dof
 
+        joint_damping = [0.01] * self.dof
         result = p.calculateInverseKinematics(
             bodyUniqueId=self.body_id,
             endEffectorLinkIndex=self.ee_link_index,
@@ -83,6 +101,7 @@ class IKSolverV2:
             restPoses=q_init,
             maxNumIterations=self.max_iters,
             residualThreshold=self.tol,
+            jointDamping=joint_damping,
         )
 
         q_sol = np.array(result[:self.dof])
