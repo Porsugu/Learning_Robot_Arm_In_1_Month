@@ -1,4 +1,4 @@
-# Panda Pick-and-Place Simulation (ROS2 + PyBullet)
+ # Panda Pick-and-Place Simulation (ROS2 + PyBullet)
 
 This project demonstrates a **ROS2-based robotic pick-and-place system** using the Franka Panda arm in PyBullet.  
 It was built step by step to learn and showcase **ROS2 nodes, services, publishers, and modular robotics control**.
@@ -56,7 +56,8 @@ graph TD
   - `IKSolverV2`
   - `TrajectoryGeneratorV3`
   - `ExecutorV4`
-  - `Gripper`
+  -  `Gripper (supports **physics-based grasping** instead of teleport-only attach)` 
+
 - Optional GUI (PyQt5) for interactive control and real-time task status
 
 ---
@@ -141,6 +142,7 @@ ros2 run my_panda_sim gui_control
 - **Custom ROS2 interfaces** → srv/msg instead of hard-coded APIs.
 - **Real-time monitoring** → `/task_status` publisher for GUI and CLI.
 - **Extendable** → currently single node, but ready for multi-node split (`ik_node`, `traj_node`, `exec_node`).
+- **Physics realism** → gripper motion uses PyBullet’s position-control motors, so objects are clamped and lifted by actual contact forces (not just constraints).
 - **Industry-style workflow** → build with colcon, launch with ROS2, simulation in PyBullet.
 
 ---
