@@ -28,7 +28,8 @@ class IKSolverV2:
         self.joint_ranges = [u - l for l, u in zip(self.lower_limits, self.upper_limits)]
 
         # A stable home configuration
-        self.home_pose = [0, -np.pi / 4, 0, -np.pi / 2, 0, np.pi / 2, 0]
+        # self.home_pose = [0, -np.pi / 4, 0, -np.pi / 2, 0, np.pi / 2, 0]
+        self.home_pose = [0, 1 / 4, 0, -np.pi / 3, 0, np.pi / 2, 0]
 
         # World-to-base transform (optional)
         self.T_w_base = T_w_base if T_w_base is not None else np.eye(4)
@@ -57,14 +58,9 @@ class IKSolverV2:
 
 
     def preSolve(self, q_init, target_pos):
-        """
-        Unconditionally aligns the robot's base to face the target.
-        This version is confirmed by direct joint testing.
-        The final angle is mapped to the [0, 2π] range.
-        """
+
         target_theta = np.arctan2(target_pos[1], target_pos[0])
 
-        # target_theta = (target_theta_raw + 2 * np.pi) % (2 * np.pi)
 
         new_q_init = np.array(self.home_pose, dtype=float)
 
@@ -89,7 +85,7 @@ class IKSolverV2:
         if q_init is None:
             q_init = [0.0] * self.dof
 
-        joint_damping = [0.01] * self.dof
+        joint_damping = [0.05] * 11
         result = p.calculateInverseKinematics(
             bodyUniqueId=self.body_id,
             endEffectorLinkIndex=self.ee_link_index,
@@ -112,6 +108,7 @@ class IKSolverV2:
             q_sol = alt
 
         return q_sol, 0
+
 
     def _wrap_to_pi(self, a):
         """

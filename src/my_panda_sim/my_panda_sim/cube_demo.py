@@ -93,15 +93,15 @@ class CubeDemo:
     def _sample_position(self):
         """Randomly sample a valid cube position."""
         while True:
-            x = random.uniform(-0.4, 0.4)
-            y = random.uniform(-0.4, -0.25)
+            x = random.uniform(-0.5, 0.5)
+            y = random.uniform(-0.35, -0.5)
             pos = [x, y, 0.02]
 
             # Use tray center position to avoid spawning there
             if abs(x - self.drop_pos[0]) < 0.2 and abs(y - self.drop_pos[1]) < 0.2:
                 continue
 
-            if -0.25 < x < 0.25:
+            if -0.35 < x < 0.35:
                 continue
 
             too_close = False
@@ -123,7 +123,7 @@ class CubeDemo:
         p.changeVisualShape(obj_id, -1, rgbaColor=[0.0, 1.0, 0.0, 1.0])
 
         p.changeDynamics(
-            obj_id, -1, mass=0.02, lateralFriction=1.5,
+            obj_id, -1, mass=0.02, lateralFriction=5,
             rollingFriction=0.001, spinningFriction=0.001, restitution=0.0
         )
 
@@ -204,7 +204,7 @@ class CubeDemo:
                     tray_aabb = p.getAABB(self.drop_box_id)
                     tray_top_z = tray_aabb[1][2]
 
-                    target_z = tray_top_z + (cube_dims[2] / 2.0) + 0.05
+                    target_z = tray_top_z + (cube_dims[2] / 2.0) + 0.01
 
                     # 4. Assemble the final target position vector
                     target_drop_pos = [target_x, target_y, target_z]

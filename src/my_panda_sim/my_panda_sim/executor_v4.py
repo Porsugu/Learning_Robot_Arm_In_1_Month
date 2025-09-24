@@ -78,17 +78,17 @@ class ExecutorV4:
             q_traj2, _ = self._execute_core(q_traj[-1], grasp_pos, down, plot, print_diff, presolve=False)
             q_traj.extend(q_traj2[1:])
 
-            deep_mm = 0.007
-            deep_pos = [grasp_pos[0], grasp_pos[1], grasp_pos[2] - deep_mm]
-            q_traj3, _ = self._execute_core(q_traj[-1], deep_pos, down, plot, print_diff, presolve=False)
-            q_traj.extend(q_traj3[1:])
+            # deep_mm = 0.007
+            # deep_pos = [grasp_pos[0], grasp_pos[1], grasp_pos[2] - deep_mm]
+            # q_traj3, _ = self._execute_core(q_traj[-1], deep_pos, down, plot, print_diff, presolve=False)
+            # q_traj.extend(q_traj3[1:])
 
             if self.gripper:
                 print(f"[Executor] Closing gripper strictly to width {STRICT_WIDTH:.3f}")
                 self.gripper.close(obj_id=obj_id, width=STRICT_WIDTH)
                 time.sleep(0.3)
                 self.gripper.wait_until_settled(timeout=0.6)
-                print("ContactPoints:", p.getContactPoints(bodyA=self.robot_id, bodyB=obj_id))
+                # print("ContactPoints:", p.getContactPoints(bodyA=self.robot_id, bodyB=obj_id))
 
             lift_pos = [goal_pos[0], goal_pos[1], grasp_z + 0.30]
             q_traj4, _ = self._execute_core(q_traj[-1], lift_pos, down, plot, print_diff, presolve=False)

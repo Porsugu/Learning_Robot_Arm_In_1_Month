@@ -25,7 +25,7 @@ class Gripper:
         for j in self.fingers:
             p.changeDynamics(
                 self.robot_id, j,
-                lateralFriction=50.0,
+                lateralFriction=200.0,
                 rollingFriction=0.001,
                 spinningFriction=0.001
             )
@@ -36,7 +36,7 @@ class Gripper:
         for j in self.fingers:
             p.setJointMotorControl2(
                 self.robot_id, j, p.POSITION_CONTROL,
-                targetPosition=target, force=100
+                targetPosition=target, force=200
             )
         if self.grasp_constraint is not None:
             p.removeConstraint(self.grasp_constraint)
@@ -58,7 +58,7 @@ class Gripper:
         for j in self.fingers:
             p.setJointMotorControl2(
                 self.robot_id, j, p.POSITION_CONTROL,
-                targetPosition=target, force=150
+                targetPosition=target, force=250
             )
 
         if self.mode == "teleport" and obj_id is not None and self.grasp_constraint is None:
@@ -79,7 +79,7 @@ class Gripper:
             if obj_id is not None:
                 p.changeDynamics(
                     obj_id, -1,
-                    lateralFriction=5.0,
+                    lateralFriction=200.0,
                     rollingFriction=0.001,
                     spinningFriction=0.001
                 )
