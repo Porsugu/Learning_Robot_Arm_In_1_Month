@@ -28,8 +28,9 @@ class IKSolverV2:
         self.joint_ranges = [u - l for l, u in zip(self.lower_limits, self.upper_limits)]
 
         # A stable home configuration
-        # self.home_pose = [0, -np.pi / 4, 0, -np.pi / 2, 0, np.pi / 2, 0]
-        self.home_pose = [0, 1 / 4, 0, -np.pi / 3, 0, np.pi / 2, 0]
+        self.home_pose = [0, -np.pi / 4, 0, -np.pi / 2, 0, np.pi / 2, 0]
+
+        self.ready_pose = [0, 1 / 4, 0, -np.pi / 3, 0, np.pi / 2, 0]
 
         # World-to-base transform (optional)
         self.T_w_base = T_w_base if T_w_base is not None else np.eye(4)
@@ -62,7 +63,7 @@ class IKSolverV2:
         target_theta = np.arctan2(target_pos[1], target_pos[0])
 
 
-        new_q_init = np.array(self.home_pose, dtype=float)
+        new_q_init = np.array(self.ready_pose, dtype=float)
 
         new_q_init[0] = target_theta
 

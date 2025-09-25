@@ -41,7 +41,7 @@ class CubeDemo:
         finger_joints = [9, 10]
 
         self.ik_solver = IKSolverV2(self.robot_id, ee_link_index, dof)
-        self.traj_gen = TrajectoryGeneratorV3(steps=10)
+        self.traj_gen = TrajectoryGeneratorV3(steps=100)
         self.gripper = Gripper(self.robot_id, finger_joints, ee_link_index)
 
         self.executor = ExecutorV4(
@@ -101,7 +101,7 @@ class CubeDemo:
             if abs(x - self.drop_pos[0]) < 0.2 and abs(y - self.drop_pos[1]) < 0.2:
                 continue
 
-            if -0.35 < x < 0.35:
+            if -0.3 < x < 0.3:
                 continue
 
             too_close = False
@@ -123,7 +123,7 @@ class CubeDemo:
         p.changeVisualShape(obj_id, -1, rgbaColor=[0.0, 1.0, 0.0, 1.0])
 
         p.changeDynamics(
-            obj_id, -1, mass=0.02, lateralFriction=5,
+            obj_id, -1, mass=0.02, lateralFriction=1000,
             rollingFriction=0.001, spinningFriction=0.001, restitution=0.0
         )
 
@@ -204,8 +204,9 @@ class CubeDemo:
                     tray_aabb = p.getAABB(self.drop_box_id)
                     tray_top_z = tray_aabb[1][2]
 
-                    target_z = tray_top_z + (cube_dims[2] / 2.0) + 0.01
+                    # target_z = tray_top_z + (cube_dims[2] / 2.0) + 0.01
 
+                    target_z = tray_top_z
                     # 4. Assemble the final target position vector
                     target_drop_pos = [target_x, target_y, target_z]
 

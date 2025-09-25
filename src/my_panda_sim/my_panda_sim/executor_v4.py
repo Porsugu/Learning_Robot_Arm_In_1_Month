@@ -123,7 +123,6 @@ class ExecutorV4:
                 if self.gripper:
                     print("[Executor] Place → Opening gripper.")
                     self.gripper.wait_until_settled(timeout=0.6)
-                    # self.gripper.set_width(0.08)
                     self.gripper.open(width=0.08)
                     self.gripper.wait_until_settled(timeout=0.5)
                     time.sleep(0.3)
@@ -131,7 +130,7 @@ class ExecutorV4:
                 q_traj1, _ = self._execute_core(q_init, goal_pos, down, plot, print_diff, presolve=True)
                 q_traj_total.extend(q_traj1)
                 if self.gripper:
-                    print("[Executor] Place (no surface) → Opening gripper.")
+                    print("[Executor] Place (no surface) --> Opening gripper.")
                     self.gripper.open(width=0.08)
                     self.gripper.wait_until_settled(timeout=0.5)
                     time.sleep(0.3)
@@ -145,7 +144,8 @@ class ExecutorV4:
         # REGULAR motion
         # -------------------
         else:
-            return self._execute_core(q_init, goal_pos, down, plot, print_diff, presolve=True)
+            # return self._execute_core(q_init, goal_pos, down, plot, print_diff, presolve=True)
+            return self._return_home(q_init, self.ik_solver.home_pose)
 
     # ------------------------------------------------
     # Core execution & helpers
@@ -157,7 +157,7 @@ class ExecutorV4:
         if presolve:
             aligned, aligned_q_init = self.ik_solver.preSolve(q_init, goal_pos)
             if not aligned:
-                print("[Executor] PreSolve: realigning to safe home pose")
+                print("[Executor] PreSolve: realigning to safe ready pose")
                 self._move_joints_smoothly(q_init, np.array(aligned_q_init))
                 q_init = np.array(aligned_q_init)
                 ls = p.getLinkState(self.robot_id, self.ee_link_index, computeForwardKinematics=True)
@@ -207,6 +207,18 @@ class ExecutorV4:
 
         return q_traj, (traj_ideal, traj_real)
 
+    def _return_home(self, q_init, goal_pos):
+        ls = p.getLinkState(self.robot_id, self.ee_link_index, computeForwardKinematics=True)
+        cur_pos = np.array(ls[4])
+
+        aligned, aligned_q_init = self.ik_solver.preSolve(q_init, goal_pos)
+        self._move_joints_smoothly(q_init, np.array(aligned_q_init))
+        traj_ideal = None
+        traj_real = [cur_pos.tolist()]
+        q_traj = [q_init]
+
+        return q_traj, (traj_ideal, traj_real)
+
     # def _move_joints_smoothly(self, q_start, q_end):
     #     q_start = np.array(q_start, dtype=float)
     #     q_end = np.array(q_end, dtype=float)
@@ -224,7 +236,6 @@ class ExecutorV4:
         """
         Moves joints smoothly using physics-based position control.
         """
-        # This is a simple interpolation, but the key is the control method.
         q_start = np.array(q_start, dtype=float)
         q_end = np.array(q_end, dtype=float)
         diff = q_end - q_start
