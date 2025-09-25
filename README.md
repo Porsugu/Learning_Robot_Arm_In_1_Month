@@ -5,7 +5,7 @@ It was built step by step to learn and showcase **ROS2 nodes, services, publishe
 <p align="center">
   <img src="https://github.com/user-attachments/assets/d8f6d180-5da6-4f63-b172-fe15cfe3ccf1" width="800"/>
   <br/>
-  <em>Demo (2× speed)</em>
+  <em>Demo (10× speed)</em>
 </p>
 
 ---
