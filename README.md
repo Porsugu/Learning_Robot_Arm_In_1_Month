@@ -3,7 +3,7 @@
 This project demonstrates a **ROS2-based robotic pick-and-place system** using the Franka Panda arm in PyBullet.  
 It was built step by step to learn and showcase **ROS2 nodes, services, publishers, and modular robotics control**.
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/4661fb5e-0f71-4377-81de-780d8af909ca" width="800"/>
+  <img src="[https://github.com/user-attachments/assets/4661fb5e-0f71-4377-81de-780d8af909ca](https://github.com/user-attachments/assets/d8f6d180-5da6-4f63-b172-fe15cfe3ccf1)" width="800"/>
   <br/>
   <em>Demo (2× speed)</em>
 </p>
