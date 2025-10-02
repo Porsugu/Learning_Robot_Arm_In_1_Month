@@ -148,6 +148,7 @@ ros2 run my_panda_sim gui_control
 - **Extendable** → currently single node, but ready for multi-node split (`ik_node`, `traj_node`, `exec_node`).
 - **Physics realism** → gripper motion uses PyBullet’s position-control motors, so objects are clamped and lifted by actual contact forces (not just constraints).
 - **Industry-style workflow** → build with colcon, launch with ROS2, simulation in PyBullet.
+- **Pragmatic singularity avoidance** → Uses a pre-defined 'ready pose' as a waypoint to ensure robust motion and avoid kinematic singularities within the task's workspace.
 
 ---
 
